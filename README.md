@@ -1,6 +1,7 @@
 ## Emotion Tracker
-This is a chrome extension for tracking user's emotion. User can record their emotion by text any time and the tracker will store it can analyze it.
-### features
-- record your emotion by text
-- get weekly emotion report by tracker's analysis
-- chat with ai for describing more details about the emotion
+This Chrome extension allows users to track their emotions. Users can record their emotions by typing at any time, and the tracker will store and analyze the data.
+
+### Features
+- Record user's emotions by typing
+- Receive a weekly emotion report based on the tracker's analysis
+- Chat with AI to describe more details about user's emotions
