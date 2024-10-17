@@ -10,7 +10,7 @@ const prompt = "";
 
 export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
   const [chatMessages, setChatMessages] = useState<ChatMessageContent[]>([]);
-  const [chatSettings, setChatSettings] = useState<ChatSettings>({
+  const [chatSettings] = useState<ChatSettings>({
     model: "gpt-3.5-turbo",
     prompt: `${prompt}`,
     temperature: 0.5,
@@ -25,11 +25,8 @@ export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
     <ChatbotUIContext.Provider
       value={{
         chatSettings,
-        setChatSettings,
         chatMessages,
         setChatMessages,
-        runningCode,
-        setRunningCode,
         isGenerating,
         setIsGenerating,
         abortController,
