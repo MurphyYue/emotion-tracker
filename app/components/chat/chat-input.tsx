@@ -4,7 +4,7 @@ import { TextareaAutosize } from "@/ui/textarea-autosize";
 import { cn } from "@/lib/utils";
 import { ChatbotUIContext } from "@/context";
 import { useContext } from "react";
-import { useChatHandler } from './chat-hooks/use-chat-handler';
+import { useChatHandler } from './use-chat-handler';
 
 const ChatInput: React.FC = () => {
   const { chatMessages, isGenerating, userInput, setUserInput } = useContext(ChatbotUIContext);

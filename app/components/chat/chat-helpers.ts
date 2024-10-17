@@ -116,9 +116,10 @@ export const fetchChatResponse = async (
   setIsGenerating: React.Dispatch<React.SetStateAction<boolean>>,
   setChatMessages: React.Dispatch<React.SetStateAction<ChatMessageContent[]>>
 ) => {
+  console.log(process.env.NEXT_PUBLIC_OPENAI_API_KEY)
   const myHeaders = new Headers();
   myHeaders.append("Accept", "application/json");
-  myHeaders.append("Authorization", `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`);
+  myHeaders.append("Authorization", `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`);
   myHeaders.append("User-Agent", "Apifox/1.0.0 (https://apifox.com)");
   myHeaders.append("Content-Type", "application/json");
 

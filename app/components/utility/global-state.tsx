@@ -6,7 +6,7 @@ import { ChatbotUIContext } from "@/context";
 interface GlobalStateProps {
   children: React.ReactNode;
 }
-const prompt = "";
+const prompt = "You are a psychologist who can analyze users 'emotions and give assessments of current emotions and suggestions for stabilizing them.";
 
 export const GlobalState: FC<GlobalStateProps> = ({ children }) => {
   const [chatMessages, setChatMessages] = useState<ChatMessageContent[]>([]);
