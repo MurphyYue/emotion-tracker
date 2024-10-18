@@ -15,11 +15,10 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 w-full h-full p-4">
-      <h1 className="text-3xl font-bold mb-4">Daily Emotion Recorder</h1>
+    <div className="bg-gray-100 w-full h-full p-4 flex flex-col">
       <GlobalState>
-      <Chat />
-    </GlobalState>
+        <Chat />
+      </GlobalState>
     </div>
   );
 }

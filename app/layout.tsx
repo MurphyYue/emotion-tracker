@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className='w-96 h-full'
+        className='w-96 h-screen'
       >
         {children}
       </body>
