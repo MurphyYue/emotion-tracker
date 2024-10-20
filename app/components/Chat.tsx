@@ -4,9 +4,7 @@ import { ChatMessages } from './chat/chat-messages'
 import { ChatbotUIContext } from "@/context";
 import { useScroll } from './chat/use-scroll'
 
-interface ChatProps {}
-
-const Chat: React.FC<ChatProps> = () => {
+const Chat: React.FC = () => {
   const { chatMessages } = useContext(ChatbotUIContext);
   const { messagesEndRef } = useScroll();
   return (
