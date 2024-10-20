@@ -1,3 +1,4 @@
+"use client"
 import { useContext } from "react";
 import { ChatbotUIContext } from "@/context";
 import {
@@ -34,7 +35,9 @@ export const useChatHandler = () => {
       setIsGenerating(true);
       const newAbortController = new AbortController();
       setAbortController(newAbortController);
-      !isRegeneration && validateChatSettings(messageContent);
+      if (!isRegeneration) {
+        validateChatSettings(messageContent);
+      }
       const newMessageContent = messageContent;
       const { tempUserChatMessage, tempAssistantChatMessage } =
         createTempMessages(
@@ -56,7 +59,7 @@ export const useChatHandler = () => {
         return;
       }
       console.log("payload", payload);
-      const generatedText = await handleHostedChat(
+      await handleHostedChat(
         payload,
         tempAssistantChatMessage,
         isRegeneration,

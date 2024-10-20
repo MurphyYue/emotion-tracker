@@ -1,3 +1,4 @@
+"use client"
 import { FC, useState } from "react";
 import { ChatMessageContent } from "@/types/chat-message";
 import { ChatSettings } from "@/types/chat";

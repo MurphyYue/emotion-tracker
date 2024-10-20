@@ -1,3 +1,4 @@
+"use client"
 import { ChatbotUIContext } from "@/context";
 import { useContext, useRef, useEffect } from "react";
 

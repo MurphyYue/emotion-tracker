@@ -1,10 +1,10 @@
-import { ChatbotUIContext } from "@/context"
-import { FC, useContext } from "react"
-import Message from "../messages/message"
+"use client";
+import { ChatbotUIContext } from "@/context";
+import { FC, useContext } from "react";
+import Message from "../messages/message";
 
-interface ChatMessagesProps {}
 
-export const ChatMessages: FC<ChatMessagesProps> = ({}) => {
+export const ChatMessages: FC = ({}) => {
   const { chatMessages } = useContext(ChatbotUIContext);
   return chatMessages
     .sort((a, b) => a.message.sequence_number - b.message.sequence_number)
@@ -15,6 +15,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({}) => {
           message={chatMessage.message}
           isLast={index === array.length - 1}
         />
-      )
-    })
-}
+      );
+    });
+};

@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { IconPlayerStopFilled, IconSend } from "@tabler/icons-react";
 import { TextareaAutosize } from "@/ui/textarea-autosize";

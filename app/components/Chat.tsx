@@ -1,3 +1,4 @@
+"use client"
 import React, { useContext } from 'react';
 import ChatInput from './chat/chat-input'
 import { ChatMessages } from './chat/chat-messages'
