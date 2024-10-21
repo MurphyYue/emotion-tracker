@@ -24,3 +24,13 @@ export const ChatbotUIContext = createContext<ChatbotUIContext>({
   userInput: "",
   setUserInput: () => {},
 });
+
+interface GlobalContext {
+  activeTab: string,
+  setActiveTab: Dispatch<SetStateAction<string>>
+}
+
+export const GlobalContext = createContext<GlobalContext>({
+  activeTab: 'home',
+  setActiveTab: () => {}
+})

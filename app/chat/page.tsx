@@ -1,10 +1,10 @@
 import Chat from "@/components/Chat";
-import { GlobalState } from "@/components/utility/global-state";
+import { ChatState } from "@/components/utility/chat-state";
 
 export default function Page(){
   return (
-    <GlobalState>
+    <ChatState>
       <Chat />
-    </GlobalState>
+    </ChatState>
   );
 }

@@ -1,6 +1,6 @@
 
 import "./globals.css";
-
+import NavBar from "@/components/NavBar"
 
 export default function RootLayout({
   children,
@@ -13,6 +13,7 @@ export default function RootLayout({
         className='w-96 h-screen'
       >
         {children}
+        <NavBar />
       </body>
     </html>
   );
