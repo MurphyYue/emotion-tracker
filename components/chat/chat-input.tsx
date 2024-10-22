@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import { IconPlayerStopFilled, IconSend } from "@tabler/icons-react";
-import { TextareaAutosize } from "@/ui/textarea-autosize";
+import { TextareaAutosize } from "@/components/textarea-autosize";
 import { cn } from "@/lib/utils";
 import { ChatbotUIContext } from "@/context";
 import { useContext } from "react";

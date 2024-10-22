@@ -1,12 +1,10 @@
 import { Tab } from "@/types/types"
 const tabs: Tab[] = [
   {
-    name: 'Home',
-    path: '/'
+    name: 'home'
   },
   {
-    name: 'Chat',
-    path: '/chat'
+    name: 'chat'
   }
 ]
 export default tabs;

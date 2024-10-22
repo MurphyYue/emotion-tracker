@@ -164,6 +164,7 @@ export const processResponse = async (
               try {
                 return JSON.parse(line);
               } catch (e) {
+                console.error(e)
                 return null;
               }
             })

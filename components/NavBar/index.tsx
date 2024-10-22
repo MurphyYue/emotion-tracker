@@ -3,20 +3,19 @@ import tabList from "@/config/navConfig";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useContext } from "react";
 import { GlobalContext } from "@/context"
-import { useRouter } from 'next/navigation'
 import { Tab } from "@/types/types"
 const NavBar: React.FC = () => {
   const { activeTab, setActiveTab } = useContext(GlobalContext);
-  const router = useRouter();
+  console.log(activeTab)
   const tabClick = (tab: Tab) => {
     setActiveTab(tab.name);
-    router.push(tab.path)
+    console.log(tab.name)
   }
   return (
-    <Tabs defaultValue={activeTab}>
-      <TabsList>
+    <Tabs defaultValue={activeTab} className="w-full">
+      <TabsList className="grid w-full grid-cols-2">
         {tabList.map((tab) => (
-          <TabsTrigger value={tab.name} onClick={() => tabClick(tab)}>{tab.name}</TabsTrigger>
+          <TabsTrigger key={tab.name} value={tab.name} onClick={() => tabClick(tab)}>{tab.name}</TabsTrigger>
         ))}
       </TabsList>
     </Tabs>

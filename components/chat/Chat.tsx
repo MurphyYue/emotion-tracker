@@ -1,9 +1,9 @@
 "use client"
 import React, { useContext } from 'react';
-import ChatInput from './chat/chat-input'
-import { ChatMessages } from './chat/chat-messages'
+import ChatInput from './chat-input'
+import { ChatMessages } from './chat-messages'
 import { ChatbotUIContext } from "@/context";
-import { useScroll } from './chat/use-scroll'
+import { useScroll } from './use-scroll'
 
 const Chat: React.FC = () => {
   const { chatMessages } = useContext(ChatbotUIContext);
