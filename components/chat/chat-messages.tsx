@@ -1,7 +1,7 @@
 "use client";
 import { ChatbotUIContext } from "@/context";
 import { FC, useContext } from "react";
-import Message from "../messages/message";
+import Message from "../chat-messages/message";
 
 
 export const ChatMessages: FC = ({}) => {

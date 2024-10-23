@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { ChatMessage } from "@/types/chat-message";
 import { cn } from "@/lib/utils";
