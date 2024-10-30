@@ -5,7 +5,7 @@ const Messages: React.FC<{messages: HomeMessage[]}> = ({messages}) => {
   return (
     <ol className="relative border-s border-gray-200 dark:border-gray-700">
       {messages.map(message => (
-        <Message message={message}/>
+        <Message message={message} key={message.createTimestamp}/>
       ))}
     </ol>
   );
