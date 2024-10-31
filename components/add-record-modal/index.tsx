@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import { useState } from "react";
 
 interface AddRecordModalProps {
   isOpen: boolean;
@@ -12,31 +13,40 @@ export default function AddRecordModal({
   onSaved,
 }: AddRecordModalProps) {
   if (!isOpen) return null;
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const save = async () => {
-    const description = (
-      document.querySelector("textarea") as HTMLTextAreaElement
-    ).value;
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/record`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: "1",
-          userName: "murphy1",
-          content: description,
-        }),
+    setIsLoading(true);
+    try {
+      const description = (
+        document.querySelector("textarea") as HTMLTextAreaElement
+      ).value;
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/record`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: "1",
+            userName: "murphy1",
+            content: description,
+          }),
+        }
+      );
+      if (response.ok) {
+        onSaved();
+        console.log("Record saved successfully");
+      } else {
+        console.error("Failed to save record");
       }
-    );
-    if (response.ok) {
-      onSaved();
-      console.log("Record saved successfully");
-    } else {
-      console.error("Failed to save record");
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <div className="fixed inset-0 bg-background z-50 overflow-y-auto">
       <div className="p-4">
@@ -78,14 +88,16 @@ export default function AddRecordModal({
                 type="button"
                 onClick={onClose}
                 className="px-4 py-2 border rounded-md hover:bg-muted"
+                disabled={isLoading}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+                className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 disabled:opacity-50"
+                disabled={isLoading}
               >
-                Save
+                {isLoading ? "Saving..." : "Save"}
               </button>
             </div>
           </div>
