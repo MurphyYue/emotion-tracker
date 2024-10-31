@@ -34,6 +34,12 @@ export default function Home() {
       <AddRecordModal 
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onSaved={() => {
+          setIsModalOpen(false);
+          fetchData().then((data: HomeMessage[]) => {
+            setMessages(data);
+          });
+        }}
       />
     </div>
   );

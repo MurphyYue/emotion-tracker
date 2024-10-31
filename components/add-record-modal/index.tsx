@@ -3,11 +3,13 @@ import { X } from "lucide-react";
 interface AddRecordModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSaved: () => void;
 }
 
 export default function AddRecordModal({
   isOpen,
   onClose,
+  onSaved,
 }: AddRecordModalProps) {
   if (!isOpen) return null;
   const save = async () => {
@@ -29,7 +31,7 @@ export default function AddRecordModal({
       }
     );
     if (response.ok) {
-      onClose();
+      onSaved();
       console.log("Record saved successfully");
     } else {
       console.error("Failed to save record");
