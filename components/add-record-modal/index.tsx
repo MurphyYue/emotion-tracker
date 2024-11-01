@@ -1,11 +1,36 @@
 import { X } from "lucide-react";
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 interface AddRecordModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSaved: () => void;
 }
+
+const FormSchema = z.object({
+  content: z
+    .string()
+    .min(10, {
+      message: "description must be at least 10 characters.",
+    })
+    .max(800, {
+      message: "description must not be longer than 80 characters.",
+    }),
+});
 
 export default function AddRecordModal({
   isOpen,
@@ -15,13 +40,12 @@ export default function AddRecordModal({
   if (!isOpen) return null;
 
   const [isLoading, setIsLoading] = useState(false);
-
-  const save = async () => {
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+  });
+  const save = async (data: z.infer<typeof FormSchema>) => {
     setIsLoading(true);
     try {
-      const description = (
-        document.querySelector("textarea") as HTMLTextAreaElement
-      ).value;
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/record`,
         {
@@ -32,7 +56,7 @@ export default function AddRecordModal({
           body: JSON.stringify({
             userId: "1",
             userName: "murphy1",
-            content: description,
+            ...data,
           }),
         }
       );
@@ -57,51 +81,37 @@ export default function AddRecordModal({
             <X className="h-6 w-6" />
           </button>
         </div>
-
         {/* Modal content/form */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            save();
-          }}
-        >
-          <div className="space-y-4">
-            {/* <div>
-              <label className="block text-sm font-medium mb-1">Title</label>
-              <input 
-                type="text" 
-                className="w-full p-2 border rounded-md"
-                placeholder="Enter title"
-              />
-            </div> */}
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Description
-              </label>
-              <textarea
-                className="w-full p-2 border rounded-md h-32"
-                placeholder="Enter description"
-              />
-            </div>
-            <div className="flex justify-end space-x-2">
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-4 py-2 border rounded-md hover:bg-muted"
-                disabled={isLoading}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 disabled:opacity-50"
-                disabled={isLoading}
-              >
-                {isLoading ? "Saving..." : "Save"}
-              </button>
-            </div>
-          </div>
-        </form>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(save)}
+            className="w-full space-y-6"
+          >
+            <FormField
+              control={form.control}
+              name="content"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your emotion here"
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription onClick={() => {
+                    onClose();
+                  }}>
+                    Otherwise, you can chat with me.<span className="ml-1">→</span>
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit">{isLoading ? "Saving..." : "Save"}</Button>
+          </form>
+        </Form>
       </div>
     </div>
   );
