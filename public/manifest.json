@@ -7,10 +7,20 @@
     "default_popup": "index.html",
     "default_icon": "logo.png"
   },
-  "permissions": [],
+  "permissions": ["sidePanel", "identity", "storage"],
+  "oauth2": {
+    "client_id": "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
+    "scopes": [
+      "email",
+      "profile"
+    ]
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
   "web_accessible_resources": [
     {
-      "resources": ["index.html", "chat.html"],
+      "resources": ["index.html"],
       "matches": ["<all_urls>"]
     }
   ],

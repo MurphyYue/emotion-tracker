@@ -1,15 +1,65 @@
 import Home from "@/components/home";
 import Chat from "@/components/chatpage";
 import { useContext } from "react";
-import { GlobalContext } from "@/context"
+import { GlobalContext } from "@/context";
+import { useEffect, useState } from "react";
 
 export default function Page() {
-  const { activeTab } = useContext(GlobalContext)
-  console.log(activeTab)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState<any>(null);
+
+  const handleLogin = async () => {
+    chrome.identity.getAuthToken({ interactive: true }, async (token) => {
+      if (chrome.runtime.lastError) {
+        console.error("Authentication failed:", chrome.runtime.lastError);
+        return;
+      }
+
+      if (token) {
+        // Fetch Google user profile data
+        const response = await fetch(
+          "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const user = await response.json();
+
+        setUserInfo(user);
+        setIsLoggedIn(true);
+        chrome.storage.local.set({ userInfo: user });
+
+        // Send user info to your backend
+        await fetch("http://localhost:3001/auth/google/redirect", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        });
+      }
+    });
+  };
+  useEffect(() => {
+    // Check if the user is already logged in by checking stored user data
+    chrome.storage.local.get(["userInfo"], (result) => {
+      if (result.userInfo) {
+        console.log(result.userInfo);
+        setUserInfo(result.userInfo);
+        setIsLoggedIn(true);
+      }
+    });
+  }, []);
+  const { activeTab } = useContext(GlobalContext);
+  console.log(activeTab);
   return (
-    <>
-    {activeTab === "home" && <Home />}
-    {activeTab === "chat" && <Chat />}
-    </>
+    <div>
+      {isLoggedIn ? (
+        <>
+          {activeTab === "home" && <Home />}
+          {activeTab === "chat" && <Chat />}
+        </>
+      ) : (
+        <button onClick={handleLogin}>Login with Google</button>
+      )}
+    </div>
   );
 }
