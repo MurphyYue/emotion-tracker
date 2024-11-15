@@ -9,7 +9,7 @@
   },
   "permissions": ["sidePanel", "identity", "storage"],
   "oauth2": {
-    "client_id": "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
+    "client_id": "159524568097-381iu9pflhsf4pg5khr0oqk95uhoq3qt.apps.googleusercontent.com",
     "scopes": [
       "email",
       "profile"

@@ -23,3 +23,48 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true; // Indicate we're sending a response asynchronously
   }
 });
+
+
+// extension/src/background.ts
+
+// import { browser } from "webextension-polyfill";
+
+// // Initialize Google Sign-In
+// const googleSignIn = new google.accounts.id.Client({
+//   client_id: "YOUR_CLIENT_ID",
+//   callback: handleSignInResponse,
+// });
+
+// function handleSignIn() {
+//   googleSignIn.signIn();
+// }
+
+// function handleSignInResponse(response) {
+//   if (response.credential) {
+//     // Send the JWT to your server
+//     fetch("https://your-server.com/api/auth/login", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ id_token: response.credential }),
+//     })
+//       .then((res) => res.json())
+//       .then((data) => {
+//         // Handle server response (e.g., store login status)
+//         console.log(data);
+//       })
+//       .catch((error) => {
+//         console.error("Error sending JWT to server:", error);
+//       });
+//   } else {
+//     // Handle sign-in error
+//     console.error("Sign-in error:", response);
+//   }
+// }
+
+// // Register the sign-in button
+// browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+//   if (request.type === "signIn") {
+//     handleSignIn();
+//   }
+// });
+

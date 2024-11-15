@@ -37,12 +37,14 @@ export default function AddRecordModal({
   onClose,
   onSaved,
 }: AddRecordModalProps) {
-  if (!isOpen) return null;
 
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+
+  if (!isOpen) return null;
+
   const save = async (data: z.infer<typeof FormSchema>) => {
     setIsLoading(true);
     try {
@@ -76,7 +78,7 @@ export default function AddRecordModal({
       <div className="p-4">
         {/* Modal header */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">what's on your emotion?</h2>
+          <h2 className="text-2xl font-bold">what&apos;s on your emotion?</h2>
           <button onClick={onClose} className="p-2 hover:bg-muted rounded-full">
             <X className="h-6 w-6" />
           </button>
